@@ -163,7 +163,7 @@ function processCommand(raw){
   if(cmd==='architecture'){write('Frontend: GitHub → Amplify Hosting → managed CDN\nLeaderboard: browser → API Gateway → Lambda → DynamoDB\nScroll down to inspect every service.');return;}
   if(cmd==='about'){write('Kashfa Muskan — DevOps & Cloud Engineer | Computer Science undergraduate | AWS + Microsoft Azure.\nProduction experience: CI/CD, Docker, monitoring, and security audits.');return;}
   if(cmd==='skills'){write('AWS · Azure · Terraform · Jenkins · GitHub Actions · Docker · Linux · Nginx · Netdata · Kubernetes labs');return;}
-  if(cmd==='projects'){write('01 · Softex CI/CD pipelines (employer work, details only)\n02 · Job Tracker 3-tier AWS/Terraform lab (in progress)\n03 · Jenkins on EC2 lab\n04 · Incident Zero portfolio (AWS deployment pending)\nSee index.html#work for details.');return;}
+  if(cmd==='projects'){write('01 · Softex CI/CD pipelines (employer work, details only)\n02 · Job Tracker 3-tier AWS/Terraform lab (in progress)\n03 · Jenkins on EC2 lab\n04 · Incident Zero portfolio (live AWS-hosted leaderboard)\nSee index.html#work for details.');return;}
   if(cmd==='contact'){write('Email: kashfamuskan329@gmail.com\nGitHub: github.com/KashfaMuskan329\nLinkedIn: linkedin.com/in/kashfa-m-868908238\nPortfolio: index.html#contact');return;}
   if(cmd==='resume'){write('Public-safe resume: open index.html#contact and select RESUME PDF. No personal phone number is included.');return;}
   if(cmd==='certs'){write('Cisco Networking Certificate\nDocker Essentials\nLinux Fundamentals');return;}

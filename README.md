@@ -1,3 +1,28 @@
+# Incident Zero — live AWS portfolio
+
+**Live portfolio:** https://main.d1fva3n4t20z0j.amplifyapp.com
+**Playable game:** https://main.d1fva3n4t20z0j.amplifyapp.com/game.html
+**GitHub:** https://github.com/KashfaMuskan329/incident-zero-aws-portfolio
+
+Incident Zero is a DevOps portfolio and six-incident educational terminal simulator. Its public leaderboard is powered by **Amplify Hosting, API Gateway HTTP API, Python Lambda and DynamoDB**, deployed with AWS SAM/CloudFormation in us-east-1. The terminal incidents are fictional; the AWS-backed score board is real. It remains playable if AWS API requests fail.
+
+## Verified public project links
+
+- [Job Tracker: Nginx/JavaScript, Node/Express and PostgreSQL](https://github.com/KashfaMuskan329/3-tier-terraform) — AWS/Terraform deployment is still in progress
+- [Terraform configuration for three-tier project](https://github.com/KashfaMuskan329/3-tier-terraform/tree/main/terraform)
+- [Jenkins/Docker CI/CD on EC2](https://github.com/KashfaMuskan329/3tier-jenkins-cicd-pipeline)
+- [Server Control Room](https://github.com/KashfaMuskan329/Server-Control-Room) — Nginx, Netdata, Portainer and Python alerts
+- [Incident Zero source](https://github.com/KashfaMuskan329/incident-zero-aws-portfolio)
+
+## Verified vs. pending
+
+- Live Amplify website, SAM stack and online DynamoDB Hall of Fame have been demonstrated.
+- AWS Billing total has **not** been independently verified; never assert $0 costs without checking the console.
+- Phone number is removed from the public resume; the PDF still includes employer domains. Review with employer before broader distribution.
+- Capture current hero/mobile and AWS console evidence, redact account IDs and credentials, and test keyboard navigation before hackathon submission.
+
+---
+
 # INCIDENT ZERO V7 — Kashfa Muskan's playable DevOps portfolio
 
 Original entry for AWS Student Builder Challenge 2026.
