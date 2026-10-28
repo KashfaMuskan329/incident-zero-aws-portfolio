@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+node_modules/
+*.pem
+*.key
+terraform.tfstate*
+.terraform/
+.terraform.lock.hcl
+.aws-sam/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env.local
+.venv/

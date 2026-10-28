@@ -1,0 +1,118 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Incident Zero optional leaderboard - HTTP API + Lambda + capped DynamoDB capacity
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Description: "Exact production Amplify HTTPS origin, e.g. https://main.xxxxx.amplifyapp.com (no slash)"
+    AllowedPattern: '^https://[a-zA-Z0-9.-]+$'
+Resources:
+  LeaderboardTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PROVISIONED
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: expiresAt
+        Enabled: true
+  BackendFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.12
+      Handler: handler.lambda_handler
+      CodeUri: backend/
+      MemorySize: 128
+      Timeout: 5
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref LeaderboardTable
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:GetItem
+                - dynamodb:PutItem
+                - dynamodb:Query
+                - dynamodb:UpdateItem
+              Resource: !GetAtt LeaderboardTable.Arn
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: incident-zero-api
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref AllowedOrigin
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - content-type
+        MaxAge: 600
+  HttpStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: $default
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingRateLimit: 2
+        ThrottlingBurstLimit: 4
+  HttpIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationMethod: POST
+      IntegrationUri: !GetAtt BackendFunction.Arn
+      PayloadFormatVersion: '2.0'
+  GetLeaderboard:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: GET /leaderboard
+      Target: !Join [ '/', [ integrations, !Ref HttpIntegration ] ]
+  PostLeaderboard:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: POST /leaderboard
+      Target: !Join [ '/', [ integrations, !Ref HttpIntegration ] ]
+  GetStatus:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: GET /status
+      Target: !Join [ '/', [ integrations, !Ref HttpIntegration ] ]
+  PostVisits:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: POST /visits
+      Target: !Join [ '/', [ integrations, !Ref HttpIntegration ] ]
+  InvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt BackendFunction.Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*/*/*'
+Outputs:
+  HttpApiUrl:
+    Description: "Paste this HTTPS URL into the public config.js apiBaseUrl field"
+    Value: !Sub 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+  TableName:
+    Value: !Ref LeaderboardTable
