@@ -55,3 +55,13 @@
 /* V7 / concrete learning notes beneath case-study summaries */
 .work-card .learning-line{border-left:2px solid #bc85e5;padding:11px 13px;margin:17px 0;background:#a779e00e;font-size:12px;line-height:1.7;color:inherit}
 .work-card .learning-line strong{display:block;font:700 10px 'Space Mono',monospace;letter-spacing:.05em;color:#9160bf;margin-bottom:4px}
+
+/* Selected headline: FROM CODE TO CLOUD. WITHOUT THE CHAOS. */
+.hero h1{font-size:clamp(58px,5.35vw,96px)!important;letter-spacing:-.045em!important;white-space:normal!important;line-height:1.02!important;max-width:690px}
+.hero .headline-tail{display:inline-block;font-size:.63em;line-height:1.2;letter-spacing:-.055em;white-space:nowrap}
+.hero .headline-tail .alive-word{color:#e8c8ff;font-style:italic}
+.hero .headline-tail .alive-word::after{height:5px;bottom:0}
+.hero .hero-subtitle{max-width:600px!important;font-size:15.5px!important;line-height:1.8!important;color:#e6ddf6!important}
+.hero .hero-subtitle strong{color:#fff!important;font-weight:700}
+@media(max-width:1200px){.hero .headline-tail{font-size:.61em}}
+@media(max-width:660px){.hero h1{font-size:clamp(42px,10.4vw,62px)!important}.hero .headline-tail{font-size:.63em;letter-spacing:-.06em}.hero .hero-subtitle{font-size:13.5px!important;line-height:1.75!important}}
