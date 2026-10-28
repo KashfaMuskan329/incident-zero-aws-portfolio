@@ -1,0 +1,31 @@
+/* Incident Zero V8 — Professional hero typography + animated illustrated engineer. */
+.hero h1{font-size:clamp(58px,5.35vw,96px)!important;letter-spacing:-.045em!important;white-space:normal!important;line-height:1.02!important;max-width:690px}
+.hero .outline-word{white-space:nowrap}
+.hero .alive-word{white-space:nowrap}
+.hero-subtitle{max-width:565px!important;font-size:15.5px!important;line-height:1.78!important;color:#e5dcf5!important}
+.hero-subtitle strong{color:#fff!important;font-weight:700}
+.hero-bottom-line small{font-size:9px!important;letter-spacing:.05em}
+.center-globe{isolation:isolate;overflow:visible;border:1px solid #f4d8ff;box-shadow:inset -22px -26px 45px #090724a8,inset 14px 15px 40px #fff8,0 28px 85px #8b41e077,0 0 0 1px #fff9,0 0 0 15px #e9d4ff37!important}
+.girl-portrait-frame{position:absolute;inset:4%;overflow:hidden;border-radius:50%;z-index:2;box-shadow:inset 0 0 26px rgba(14,9,48,.9),0 0 42px rgba(209,144,255,.45);animation:girlBreathe 6s ease-in-out infinite;pointer-events:none}
+.girl-portrait-frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 44%;filter:saturate(1.05) contrast(1.04);animation:girlParallax 7.5s ease-in-out infinite}
+.center-globe .globe-inner{z-index:3;opacity:.45;pointer-events:none}
+.center-globe .globe-horizon{z-index:4;pointer-events:none;opacity:.7}
+.center-globe .globe-equator{z-index:4;pointer-events:none;opacity:.7}
+.orbit-skill .k8s-icon{color:#3477ec;font-family:var(--display)!important;font-size:clamp(27px,2.7vw,38px)!important;line-height:.9}
+.hero .orbit-skill span:last-child{font-size:clamp(9px,.77vw,10px)!important;letter-spacing:-.03em!important}
+@keyframes girlBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.018)}}
+@keyframes girlParallax{0%,100%{transform:translateY(0) scale(1.075)}50%{transform:translateY(4px) scale(1.10)}}
+@media(max-width:1200px){.hero h1{font-size:clamp(54px,6vw,82px)!important;letter-spacing:-.045em!important}}
+@media(max-width:950px){.hero h1{font-size:clamp(58px,8.5vw,85px)!important}.hero-right{margin-top:5px}}
+@media(max-width:660px){.hero h1{font-size:clamp(42px,10.4vw,62px)!important;letter-spacing:-.04em!important}.hero-subtitle{font-size:13px!important}.girl-portrait-frame{inset:2%}.hero-right{height:395px!important}}
+@media(prefers-reduced-motion:reduce){.girl-portrait-frame,.girl-portrait-frame img{animation:none!important}}
+
+.orbit-skill .k8s-icon{display:flex;align-items:center;justify-content:center}.k8s-svg{width:32px;height:32px;display:block;filter:drop-shadow(0 2px 3px #6c59b344)}
+
+/* Selected hero message — designed as a 3-line headline with a smaller final line. */
+.hero .headline-tail{display:inline-block;font-size:.63em;line-height:1.2;letter-spacing:-.055em;white-space:nowrap}
+.hero .headline-tail .alive-word{color:#e8c8ff;font-style:italic}
+.hero .headline-tail .alive-word::after{height:5px;bottom:0}
+.hero .hero-subtitle{max-width:600px!important;font-size:15.5px!important;line-height:1.8!important;color:#e6ddf6!important}
+@media (max-width:1200px){.hero .headline-tail{font-size:.61em;letter-spacing:-.055em}}
+@media (max-width:660px){.hero .headline-tail{font-size:.63em;letter-spacing:-.06em}.hero .hero-subtitle{font-size:13.5px!important;line-height:1.75!important}}
