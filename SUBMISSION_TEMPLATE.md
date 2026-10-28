@@ -1,80 +1,48 @@
-# INCIDENT ZERO: The DevOps Portfolio You Can Play
+# AWS Student Builder Challenge — Incident Zero
 
-**Developer:** Kashfa Muskan  
-**Competition:** AWS Student Builder Challenge 2026  
-**GitHub:** [PASTE PUBLIC REPO URL]  
-**Live AWS Amplify website:** [PASTE REAL LIVE URL]  
-**Demo video:** [LINK AFTER RECORDING]
+**Project:** Incident Zero — From Code to Cloud. Without the Chaos.  
+**Creator:** Kashfa Muskan  
+**Live portfolio:** https://main.d1fva3n4t20z0j.amplifyapp.com  
+**Playable game:** https://main.d1fva3n4t20z0j.amplifyapp.com/game.html  
+**GitHub:** https://github.com/KashfaMuskan329/incident-zero-aws-portfolio
 
-## Project story
+## Why I built it
 
-I wanted my portfolio to show **how I solve problems**, not just list tools. INCIDENT ZERO combines my real cloud and DevOps learning journey with a playful interactive terminal called **The Night Shift**. The design begins with an animated skill galaxy and expands into a safe, fictional on-call simulation where visitors troubleshoot real-world types of problems without touching production infrastructure.
+I wanted my DevOps portfolio to demonstrate how I think when infrastructure fails, not just list technologies. I built an interactive portfolio around the moment every on-call engineer recognizes: a 3 AM production alert.
 
-## Creative feature
+## Creative feature — The Night Shift
 
-The Night Shift contains **six** replayable simulated incidents: Nginx 502 upstream failure, full disk, expired SSL certificate, missing environment variable, CI/CD deployment failure and AWS IAM AccessDenied. Visitors type commands (for example, `docker ps`, `tail -n 20 error.log`, `df -h`, `pipeline logs`) into a mocked terminal; only recognized evidence-gathering and recovery actions advance the incident. Hints and mistakes affect a score and rank, and each resolution ends with a transparent **Root cause / Fix / Prevention** postmortem. Visitors can also inspect a clickable diagram of the intended website architecture, read the built-in How I Built It explainer, play an optional 3-minute time trial, unlock locally stored achievements, and generate a 1200×630 victory card to share. All shell and AWS outputs in the game are simulated.
+Visitors become the incident responder in six fictional scenarios: Nginx 502 upstream failures, disk exhaustion, expired TLS, missing environment configuration, failing CI/CD pipelines and AWS IAM AccessDenied. They type commands in a simulated terminal, read clues, recover systems and unlock a root-cause/fix/prevention postmortem. A time trial, achievement badges and downloadable victory card make the game replayable. All commands and systems in the incidents are simulations — no production server is affected.
 
-## AWS services (fill in ONLY when deployed)
+## What runs on real AWS
 
-- **AWS Amplify Hosting:** static site deployed from GitHub, HTTPS, globally served frontend. Deployment date: [actual date]
-- **Amazon API Gateway HTTP API:** route throttling and CORS for scoreboard/status endpoints. [deployment evidence]
-- **AWS Lambda (Python):** input validation and recomputation of game scores from command traces. [logs or screenshot]
-- **Amazon DynamoDB:** global top-10 scores and session-ping count. [table screenshot]
-- **AWS CloudWatch:** default Lambda logs and metrics for troubleshooting. [if inspected]
-- **AWS Budgets:** spending alerts configured. [screenshot if configured]
-- **AWS SAM / CloudFormation:** versioned infrastructure definitions. [template screenshot]
+The public portfolio is hosted over HTTPS using **AWS Amplify Hosting** connected to GitHub. The real Hall of Fame uses an **Amazon API Gateway HTTP API**, **AWS Lambda (Python 3.12)** and **Amazon DynamoDB**, deployed using **AWS SAM and CloudFormation** in us-east-1. The API validates player callsigns and bounded game transcripts; Lambda recalculates the score rather than trusting a browser-supplied score. An anonymous leaderboard is not fully cheat-proof. The experience degrades gracefully: if the backend becomes unavailable, the game and local results keep working.
 
-Do not list a resource as **actually used** if it wasn't deployed. The site still plays offline and accurately marks the leaderboard as unconnected until then.
+## My engineering decisions
 
-## Architecture
+I used a lightweight static frontend without a continuously running server, limited API throughput, configured a specific browser CORS origin, avoided frontend secrets and kept gameplay independent of the online service. AWS usage and actual costs will be reported from Billing rather than estimated as zero.
 
-```text
-GitHub ──push──> AWS Amplify Hosting ──managed CDN──> Visitor browser
-                                                     │
-                                    GET scores / POST score
-                                                     ▼
-                                              API Gateway HTTP API
-                                                     │
-                                                   Lambda
-                                                     │
-                                                  DynamoDB
-```
+## Challenges and learning
 
-## Learning / challenges (complete from your own experience)
+1. **CloudShell verification issue:** AWS CloudShell could not create an environment while my AWS account verification was processing. I switched to locally installed AWS CLI and SAM CLI.
+2. **Frontend/API integration:** I tested the `/leaderboard` endpoint, confirmed its successful JSON response and allowed-origin CORS header, and committed the deployed API URL to the public frontend config.
+3. **Reliable UX:** I kept the simulated terminal operational when the AWS backend is offline, so visitors can always finish an incident.
+4. **Honest documentation:** The portfolio distinguishes simulated commands and graphics from deployed AWS infrastructure and real leaderboard data.
 
-- Why I selected a static frontend and an optional serverless leaderboard: [your answer]
-- Challenge 1: [describe a real bug encountered and fixed]
-- Challenge 2: [describe an actual AWS setup or CORS issue you resolved]
-- Graceful degradation test: [browser offline test and result]
-- Server-score validation test: [unit test or screen capture]
-- Real AWS cost for the judging period: [actual billing amount, not an estimate]
-- What I would do differently next: [your answer]
+## Screenshots to attach to Your Project
 
-## Screenshots / proof (redact account ID and secrets)
+- **01 · Portfolio hero:** Illustrated engineer and orbiting AWS/Azure/DevOps skills on the LIVE website. *(Capture current desktop screenshot.)*
+- **02 · The Night Shift:** Browser terminal showing one incident and a typed diagnostic command. *(Capture live game.)*
+- **03 · Resolution/postmortem:** Root cause, fix, prevention and scored result. *(Capture live game completion.)*
+- **04 · Global Hall of Fame:** Saved player scores and ONLINE indicator. *(Evidence already captured; update if desired.)*
+- **05 · AWS deployment proof:** Amplify main branch **Deployed** view and website URL. *(Capture Console, redact identifying information.)*
+- **06 · Backend proof:** CloudFormation stack success, Lambda function, API Gateway HTTP API routes and DynamoDB leaderboard table. *(Capture console screenshots, redact account identifiers.)*
+- **07 · Architecture:** GitHub → Amplify → Browser; Browser → API Gateway → Lambda → DynamoDB; local fallback on failure. *(Use architecture image from submission assets.)*
 
-1. Desktop hero: animated skills and globe — [paste]
-2. Mobile responsive hero and nav — [paste]
-3. Terminal: selected scenario + evidence-gathering output — [paste]
-4. Postmortem with actual score and rank — [paste]
-5. Architecture explorer expanded on Lambda or DynamoDB — [paste]
-5a. “How I built it” diagram/explainer — [paste]
-5b. 6th IAM AccessDenied incident, achievements and downloadable victory card — [paste]
-6. Online Hall of Fame: real stored scores — [paste after backend works]
-7. Amplify successful deploy + live URL — [paste]
-8. API Gateway routes + Lambda + DynamoDB service screenshots — [paste after deployed]
-9. GitHub repository structure and AWS SAM template — [paste]
+**Real AWS cost:** [Insert amount and as-of date copied from AWS Billing; do not invent.]  
+**Deployment region:** us-east-1  
+**AI assistance:** Used for implementation support; adapted, reviewed and tested by the creator. Adjust wording to reflect actual process and challenge rules.
 
-## Closing reflection
+## Final verification
 
-[Write your own 120–180 words about what you learned and what you found difficult. Review any hackathon policy on use and disclosure of AI-assisted coding and be transparent.]
-
-## Before submission
-
-- [ ] Repo public, with an original published-first-time portfolio
-- [ ] Original challenge project entry created and links verified
-- [ ] Amplify accessible through judging period; mobile and keyboard tested
-- [ ] Live scoreboard only claimed if API and DynamoDB actually work
-- [ ] Build date and real service count verified
-- [ ] Demo video recorded and screenshots annotated
-- [ ] Contact info and resume reviewed for public sharing
-- [ ] Browser Lighthouse measured and improved (don't invent 90+)
+Confirm that every screenshot matches the current live website, links are correct, public resume/employer content is approved, mobile navigation and terminal are usable, AWS Budget alerts are configured, and the public site stays accessible through judging.
